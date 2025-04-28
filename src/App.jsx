@@ -1,6 +1,6 @@
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
-import Filter from "./components/Filter/Filter";
+import SearchBox from "./components/SearchBox/SearchBox"; // Оновлено!
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <ContactForm />
 
       <h2>Contacts</h2>
-      <Filter />
+      <SearchBox />
       <ContactList />
     </div>
   );

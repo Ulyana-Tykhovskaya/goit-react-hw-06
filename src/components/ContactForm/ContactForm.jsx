@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../../redux/contacts/contactsSlice.js";
-import { nanoid } from "nanoid";
+import { addContact, selectContacts } from "../../redux/contacts/contactsSlice";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const normalized = name.toLowerCase();
 
     const duplicate = contacts.find(
@@ -26,9 +24,7 @@ const ContactForm = () => {
       return;
     }
 
-    const newContact = { id: nanoid(), name, number };
-    dispatch(addContact(newContact));
-
+    dispatch(addContact(name, number));
     setName("");
     setNumber("");
   };

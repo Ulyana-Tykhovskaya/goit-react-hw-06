@@ -9,11 +9,10 @@ const Contact = ({ contact }) => {
   };
 
   return (
-    <div>
-      <p>{contact.name}</p>
-      <p>{contact.number}</p>
+    <li>
+      {contact.name}: {contact.number}
       <button onClick={handleDelete}>Delete</button>
-    </div>
+    </li>
   );
 };
 

@@ -1,22 +1,22 @@
-// ContactList.jsx
-
 import { useSelector } from "react-redux";
 import { selectContacts } from "../../redux/contacts/contactsSlice";
+import { selectFilter } from "../../redux/filter/filterSlice";
 import Contact from "../Contact/Contact";
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
-  if (contacts.length === 0) {
-    return <p>No contacts</p>;
-  }
+  const normalizedFilter = filter.toLowerCase();
+  const filteredContacts = contacts.filter((contact) => {
+    if (!contact.name || typeof contact.name !== "string") return false;
+    return contact.name.toLowerCase().includes(normalizedFilter);
+  });
 
   return (
     <ul>
-      {contacts.map((contact) => (
-        <li key={contact.id}>
-          <Contact contact={contact} />
-        </li>
+      {filteredContacts.map((contact) => (
+        <Contact key={contact.id} contact={contact} />
       ))}
     </ul>
   );
